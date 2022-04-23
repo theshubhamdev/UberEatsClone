@@ -5,9 +5,14 @@ import restaurants from "../../../assets/data/restaurants.json";
 import DishListItem from "../../components/DishListItem";
 import RestaurantDetailsHeader from "./RestaurantDetailsHeader";
 import styles from "./styles";
+import { useRoute, useNavigation } from "@react-navigation/native";
 
 const restaurant = restaurants[0];
 const RestaurantDetailsScreen = () => {
+  const Navigation = useNavigation();
+  const route = useRoute();
+  const id = route.params?.id;
+  console.warn(id);
   return (
     <View style={styles.page}>
       <FlatList
@@ -22,6 +27,7 @@ const RestaurantDetailsScreen = () => {
         color={"white"}
         size={45}
         style={styles.iconContainer}
+        onPress={() => Navigation.goBack()}
       />
     </View>
   );
