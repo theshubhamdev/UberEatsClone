@@ -1,6 +1,8 @@
 import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+const DEFAULT_IMAGE = "https://befikracommunity.in/images/logo.jpeg";
+
 const RestaurantItem = ({ restaurant }) => {
   const navigation = useNavigation();
   const ChangeScreen = () => {
@@ -11,7 +13,9 @@ const RestaurantItem = ({ restaurant }) => {
     <Pressable style={styles.restaurantContainer} onPress={ChangeScreen}>
       <Image
         source={{
-          uri: restaurant.image,
+          uri: restaurant.image.startsWith("http")
+            ? restaurant.image
+            : DEFAULT_IMAGE,
         }}
         style={styles.image}
       />
@@ -24,7 +28,7 @@ const RestaurantItem = ({ restaurant }) => {
           </Text>
         </View>
         <View style={styles.rating}>
-          <Text>{restaurant.rating}</Text>
+          <Text>{restaurant.rating.toFixed(1)}</Text>
         </View>
       </View>
     </Pressable>
