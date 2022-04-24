@@ -3,11 +3,10 @@ import React, { useState } from "react";
 import restaurants from "../../../assets/data/restaurants.json";
 import { AntDesign } from "@expo/vector-icons";
 import BasketDishItem from "../../components/BasketDishItem";
-
-const restaurant = restaurants[0];
+import { useBasketContext } from "../../context/BasketContextProvider";
 
 const Basket = () => {
-  const [quantity, setQuantity] = useState(1);
+  const { restaurant, basketDishes, totalPrice } = useBasketContext();
 
   return (
     <View style={styles.page}>
@@ -16,14 +15,14 @@ const Basket = () => {
         Your Items
       </Text>
       <FlatList
-        data={restaurant.dishes}
-        renderItem={({ item, index }) => (
-          <BasketDishItem dish={item} index={index} />
-        )}
+        data={basketDishes}
+        renderItem={({ item }) => <BasketDishItem basketDish={item} />}
       />
       <View style={styles.seperator} />
       <View style={styles.button}>
-        <Text style={styles.buttonText}>Create Order</Text>
+        <Text style={styles.buttonText}>
+          Create Order &#8226; Rs. {totalPrice.toFixed(2)}
+        </Text>
       </View>
     </View>
   );

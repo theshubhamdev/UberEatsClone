@@ -1,14 +1,14 @@
 import { View, Text, StyleSheet } from "react-native";
 
-const BasketDishItem = ({ dish, index }) => {
+const BasketDishItem = ({ basketDish }) => {
   return (
     <View style={styles.row}>
       <View style={styles.quantityContainer}>
-        <Text>{index + 1}</Text>
+        <Text>{basketDish.quantity}</Text>
       </View>
 
-      <Text style={styles.itemName}>{dish.name}</Text>
-      <Text style={styles.price}>${dish.price}</Text>
+      <Text style={styles.itemName}>{basketDish.Dish.name}</Text>
+      <Text style={styles.price}>Rs. {basketDish.Dish.price}</Text>
     </View>
   );
 };
